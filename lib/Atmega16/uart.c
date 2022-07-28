@@ -4,11 +4,11 @@
 
 static void uart_9600(void)
 {
-	#define BAUD 4800
-	#include <util/setbaud.h>
+	#define BAUD 9600
+	//#include <util/setbaud.h>
 
-	UBRRH = UBRRH_VALUE;
-	UBRRL = UBRRL_VALUE;
+	UBRRH = 0x00;
+	UBRRL = 0x47;
 
 	#if USE_2X
 		UCSRA |= (1 << U2X);

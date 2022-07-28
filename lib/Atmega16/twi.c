@@ -1,15 +1,12 @@
 #include "twi.h"
 
-void twi_init(void)
+/* Define bit rate */
+#define SCL_CLK 100000L  //define SCL clock speed
+#define BITRATE(TWSR)	((F_CPU/SCL_CLK)-16)/(2*pow(4,(TWSR&((1<<TWPS0)|(1<<TWPS1)))))
+
+void twi_init()			/* I2C initialize function */
 {
-	//DDRC &= ~((1 << PC4) | (1 << PC5));
-
-	// SCL freq = CPU freq / (16 + 2*TWBR * 4^TWPS)
-	// SCL freq = 16 000 000 Hz / (16 + 2*72 * 1) = 100 kHz
-
-	TWSR &= ~3; // TWPS = 0
-	TWBR = 72;
-	// TWBR = ((F_CPU / SCL_CLOCK) - 16)/2;
+    TWBR = BITRATE(TWSR=0x00);	/* Get bit rate register value by formula */
 }
 
 uint8_t twiStart(void)

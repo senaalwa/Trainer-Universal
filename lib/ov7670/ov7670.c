@@ -86,29 +86,16 @@ void capture_image(uint16_t w, uint16_t h)
 		{
 			while(!get_pclk());
 
-			#ifdef WITH_LCD
-				uint16_t color = ((uint16_t)get_data())<<8;
-			#else
-				uint8_t c = get_data();
-				uart_put(c);
-			#endif
+			uint8_t c = get_data();
+			uart_put(c);
 
 			while(get_pclk());
 			while(!get_pclk());
 
-			#ifdef WITH_LCD
-				color += get_data();
-				if(x<200 && y<200)
-				{
-					draw_pixel(x, y, color);
-				}
-			#else
-				c = get_data();
-				uart_put(c);
-				while(get_pclk());
-				while(!get_pclk());
-
-			#endif
+			c = get_data();
+			uart_put(c);
+			while(get_pclk());
+			while(!get_pclk());
 
 			++x;
 		}
