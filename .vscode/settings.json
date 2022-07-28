@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "i2c.h": "c",
-        "setbaud.h": "c",
-        "atmega_config.h": "c",
-        "uart.h": "c"
-    }
-}
